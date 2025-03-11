@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
-
 interface Game {
   id: number;
   name: string;
 }
-
-interface FetchGameResponse {
+interface FetchGame {
   count: number;
   results: Game[];
 }
@@ -18,12 +16,13 @@ const useGames = () => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+
     const controller = new AbortController();
     const signal = controller.signal;
 
-    setLoading(true);
     apiClient
-      .get<FetchGameResponse>("/games", { signal })
+      .get<FetchGame>("/games", { signal })
       .then((res) => {
         setGames(res.data.results);
         setLoading(false);
@@ -38,7 +37,6 @@ const useGames = () => {
 
     return () => controller.abort();
   }, []);
-
   return { games, error, isLoading };
 };
 

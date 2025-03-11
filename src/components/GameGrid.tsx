@@ -2,12 +2,12 @@ import { Spinner, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 
 const GameGrid = () => {
-  const { games, error ,  isLoading} = useGames();
+  const { games, error, isLoading } = useGames();
 
   return (
     <>
-      {error && <Text>{error}</Text>}
       {isLoading && <Spinner />}
+      {error && <Text>{error}</Text>}
       <ul>
         {games.map((game) => (
           <li key={game.id}>{game.name}</li>
