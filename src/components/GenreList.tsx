@@ -5,6 +5,8 @@ import {
   List,
   ListItem,
   Spinner,
+  Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import useGenre, { Genre } from "../hooks/useGenre";
 import getCroppedImageURL from "../services/image-url";
@@ -28,14 +30,18 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 borderRadius={8}
                 boxSize="32px"
               />
-              <Button
-                fontSize="lg"
-                variant="link"
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                onClick={() => onSelectGenre(genre)}
-              >
-                {genre.name}
-              </Button>
+              <Tooltip label={genre.name} hasArrow>
+                <Button
+                  fontSize="lg"
+                  variant="link"
+                  fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                  onClick={() => onSelectGenre(genre)}
+                >
+                  <Text noOfLines={1} maxW="120px">
+                    {genre.name}
+                  </Text>
+                </Button>
+              </Tooltip>
             </HStack>
           </ListItem>
         ))}
