@@ -3,6 +3,7 @@ import { Game } from "../hooks/useGames";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
 import getCroppedImageURL from "../services/image-url";
+import Emoji from "./Emoji";
 
 interface Props {
   game: Game;
@@ -21,6 +22,7 @@ const GameCards = ({ game }: Props) => {
         </HStack>
         <Heading fontSize={"2xl"}>
           {game.name}
+          <Emoji rating={game.rating_top} />
         </Heading>
       </CardBody>
     </Card>
